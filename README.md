@@ -32,17 +32,15 @@ A VM is very recommended!
 
 ## Changelog
 
-### 1.1.0
-  - Added MBR overwrite payload
+
 ### 1.0.0
   - Initial version of Dynamite.exe
 
 ## PLANS
 - [x] overrite mbr
-
 - [ ] more pyloads
-
 - [ ] boot animation
+- [ ] more sound
 
 ## Sorry to all coders
 If my code isn't easy to read I'm sorry. I worked 10h non-stop and I'm tired...
