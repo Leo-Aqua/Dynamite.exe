@@ -1146,7 +1146,7 @@ INT main() {
 			if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"LAST WARNING! DO YOU WANT TO RUN THIS PROGRAM?\nALL YOUR DATA WILL BE LOST!\nYOU WILL NOT BE ABLE TO USE YOUR PC AGAIN!\n(If you haven't chosen gdi-only mode)", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
 			{
 
-				/* SHADER 1*/
+				/* SHADER 1 */
 				HANDLE t_shader1 = CreateThread(0, 0, shader1, 0, 0, 0);
 				sound11();
 				Sleep(10000);
