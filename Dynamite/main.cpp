@@ -1272,7 +1272,7 @@ INT main() {
 
 				/* KABOOM */
 				HANDLE thread11 = CreateThread(0, 0, KABOOM, 0, 0, 0);
-				Sleep(500000);
+				Sleep(200000);
 
 				TerminateThread(thread11, 0);
 				CloseHandle(thread11);
