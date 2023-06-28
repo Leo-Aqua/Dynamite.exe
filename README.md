@@ -5,6 +5,7 @@ My first bigger c++ project. A gdi Trojan.
 
 ## DISCLAIMER
 The Autor of this Program (Leo-Aqua) is NOT responsible for any damages on your Device!
+!!!FOR EDUCATIONAL AND DEMONSTRATIONAL PURPOSES ONLY!!!
 
 ## Features
 - Rings
