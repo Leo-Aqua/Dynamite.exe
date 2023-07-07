@@ -4,7 +4,9 @@
 My first bigger c++ project. A gdi Trojan.
 
 ## DISCLAIMER
-The Autor of this Program (Leo-Aqua) is NOT responsible for any damages on your Device!
+The Autor of this Program (Leo-Aqua) is NOT responsible for any damages on your Device! Keep in mind this program is open source. The code may be altered and waring boxes may be removed. If this is the case you are NOT allowed to distribute this program under the name of "DYNAMITE.exe"
+
+!!!FOR EDUCATIONAL AND DEMONSTRATIONAL PURPOSES ONLY!!!
 
 ## Features
 - Rings
